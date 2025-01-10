@@ -1,0 +1,28 @@
+@use '@angular/material' as mat;
+@import '../node_modules/leaflet/dist/leaflet.css'; 
+
+$theme: mat.define-theme();
+
+body {
+    font-family: 'Roboto', "Helvetica Neue", sans-serif;
+    position: relative;
+    align-content: center;
+    margin: auto;
+    font-family: sans-serif;
+}
+
+.flex {
+    display: flex;
+}
+
+.between {
+    justify-content: space-between;
+}
+
+// --------  Some rules rewriting mapbox-gl.css styles ------- //
+.mapboxgl-map {
+    border-radius: 20px;
+}
+
+
+
