@@ -70,8 +70,8 @@ export class MoveAndStreamWS {
     }
 
     this.streamer.onmessage = (message) => {
-      // let data = JSON.parse(message.data);
-      // console.log(data)
+      let data = JSON.parse(message.data);
+      console.log(data)
     }
   }
 
