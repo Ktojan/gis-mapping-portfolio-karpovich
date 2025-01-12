@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
-import { environment } from '../../../env';
+import { environment } from '../../../../env';
 import { InitialMarkers, WayPointsBasilica, WayPointsMaximum, WayPointsObelisque } from './wayPoints';
-import { Default3DbuildingsConfig } from '../mapbox/sync-camera-drone/mapbox.service';
+import { Default3DbuildingsConfig } from '../sync-camera-drone/mapbox.service';
 import { MercatorCoordinate, Map } from 'mapbox-gl';
 
 const websocketUrl = 'https://echo.websocket.org/'; // demo websocket service with echo
@@ -26,16 +26,17 @@ export class DroneMissionComp {
   targetIndex = 0;
   activateMission1 = false;
   currentCameraPosition = null;
+  buildingsColor: string = '#AB6061';
   config = {
     token: environment.public_token,
     mapStyle: 'mapbox://styles/mapbox/streets-v9',
-    center: [12.4985118242098, 41.89739388476113], // [15.669, 44.213],
+    center: [12.4985118, 41.8973938],
     currentZoom: 17,
     pitch: 25,
     bearing: 106,
     cursorStyle: 'grab',
     paints: {
-      d3buildings: Default3DbuildingsConfig
+      d3buildings: { ...Default3DbuildingsConfig, 'fill-extrusion-color': this.buildingsColor }
     },
   }
 
@@ -47,8 +48,16 @@ export class DroneMissionComp {
     });
 
     this.addControls();
-    this.addHandlers();
     this.toggleStream();
+  }
+
+  changeColor(event) { //todo shared element
+    const newColor = event.target.value;
+    if (typeof newColor === "string" && newColor[0] === "#" && newColor.length == 7)
+      this.config.paints.d3buildings = { ...this.config.paints.d3buildings, 'fill-extrusion-color': newColor }
+    else {
+      console.error('Wrong color has been set');
+    }
   }
 
   toggleCameraAnimation(event) {
@@ -92,12 +101,6 @@ export class DroneMissionComp {
       showZoom: true,
   });
   this.map.addControl(nav, 'top-right');   
-  }
-
-  addHandlers() {
-    this.map.on('dragend', () => {
-      console.log(this.map.getCenter())
-    })
   }
 
   updateCameraPosition(position, altitude, target) {
@@ -204,69 +207,7 @@ export class DroneMissionComp {
       }
     }
     window.requestAnimationFrame(frameCustomFunction.bind(this));
-  }
-
-  // addPath() {
-
-  //   // this is the path the camera will look at
-  //   const targetRoute = routes.target.slice(0, 8);
-  //   // this is the path the camera will move along
-  //   const cameraRoute = routes.camera.slice(0, 8);
-  //   const animationDuration = 9000;
-  //   const cameraAltitude = 2000;
-  //   // get the overall distance of each route so we can interpolate along them
-  //   const routeDistance = turf.lineDistance(turf.lineString(targetRoute));
-  //   const cameraRouteDistance = turf.lineDistance(
-  //     turf.lineString(cameraRoute)
-  //   );
-
-  //       let start;
-
-  //       function frame(time) {
-  //         if (this.animationIsStopped) return;
-  //           if (!start) start = time;
-  //           // phase determines how far through the animation we are
-  //           const phase = (time - start) / animationDuration;
-  //           const alongRoute = turf.along(
-  //               turf.lineString(targetRoute),
-  //               routeDistance * phase
-  //           ).geometry.coordinates;
-
-  //           const alongCamera = turf.along(
-  //               turf.lineString(cameraRoute),
-  //               cameraRouteDistance * phase
-  //           ).geometry.coordinates;
-
-  //           const camera = this.map.getFreeCameraOptions();
-  //           camera.position = mapboxgl.MercatorCoordinate.fromLngLat(
-  //               {
-  //                   lng: alongCamera[0],
-  //                   lat: alongCamera[1]
-  //               },
-  //               cameraAltitude
-  //           );
-
-  //           camera.lookAtPoint({ lng: alongRoute[0], lat: alongRoute[1] });
-
-  //           if (Math.round(phase*100) % 10 == 0) {
-  //             console.log('current target coordinates (1 of each 10)', alongRoute);
-  //             if (this.streamer && this.isStreaming) {
-  //               const googleCoords = [alongRoute[1], alongRoute[0]];
-  //               this.streamer.send(JSON.stringify({ currentCoords: alongRoute, googleCoords }));
-  //             }
-  //           }
-
-  //           this.map.setFreeCameraOptions(camera);
-
-  //           const animationId = window.requestAnimationFrame(frame.bind(this));
-  //           if (phase > 0.99) {
-  //             window.cancelAnimationFrame(animationId);
-  //             this.toggleStream();
-  //           }   
-           
-  //       }
-  //       window.requestAnimationFrame(frame.bind(this));
-  // }
+  } 
 }
 
 

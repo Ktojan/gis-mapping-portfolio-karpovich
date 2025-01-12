@@ -23,7 +23,7 @@
   border: 3px solid brown;
   padding: 12px;
   background-color: ivory;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 
@@ -37,4 +37,18 @@
 ::ng-deep.mdc-label {
   color: green;
   font-size: x-large;
+}
+
+p#set_build_color {
+  display: flex;  
+  span {
+    min-width: 40%;
+    align-content: center;
+    font-weight: bold;
+  }
+  #color-input {
+    margin-left: 1rem;
+    width: 100%;
+  }
+
 }

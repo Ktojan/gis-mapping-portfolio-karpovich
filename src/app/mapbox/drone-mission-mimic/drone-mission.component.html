@@ -1,12 +1,18 @@
 <div id="motion-control">
   <mat-slide-toggle class="toggler animation-toggler" [checked]="!animationIsStopped"
-   (change)="toggleCameraAnimation($event)">Start/stop mission</mat-slide-toggle>
+    (change)="toggleCameraAnimation($event)">Start/stop mission</mat-slide-toggle>
   <mat-slide-toggle class="toggler" [checked]="activeWayPoints == wayPointsBasilica"
-   (change)="toggleMission($event, 'wayPointsBasilica', 0)">Mission 1: around Basilica</mat-slide-toggle>
+    (change)="toggleMission($event, 'wayPointsBasilica', 0)">Mission 1: around Basilica</mat-slide-toggle>
   <mat-slide-toggle class="toggler" [checked]="activeWayPoints == wayPointsMaximum"
-   (change)="toggleMission($event, 'wayPointsMaximum', 0)">Mission 2: all the square perimeter</mat-slide-toggle>
+    (change)="toggleMission($event, 'wayPointsMaximum', 0)">Mission 2: all the square perimeter</mat-slide-toggle>
   <mat-slide-toggle class="toggler" [checked]="activeWayPoints == wayPointsObelisque"
-   (change)="toggleMission($event, 'wayPointsObelisque', 1)">Mission 3: around Obelisque</mat-slide-toggle>
+    (change)="toggleMission($event, 'wayPointsObelisque', 1)">Mission 3: around Obelisque</mat-slide-toggle>
+
+  <p id="set_build_color">
+    <span>Set buildings color</span>
+    <input type="color" id="color-input" name="color-input" (change)="changeColor($event)"
+      [(ngModel)]="buildingsColor" />
+  </p>
 </div>
 <mgl-map id="dronemap"
   [style]="config.mapStyle"
