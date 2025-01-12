@@ -21,9 +21,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule,  MatDialogActions,  MatDialogClose,  MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
-import { DroneMissionComp } from './drone-mission-mimic/drone-mission.component';
+import { DroneMissionComp } from './mapbox/drone-mission-mimic/drone-mission.component';
 import { ArcgisBasicComponent } from './arcgis-basic/arcgis-basic.component';
 import { Indoor3DComponent } from './mapbox/indoor-3d/indoor-3d.component';
+import { HomeComponent } from './home/home.component';
+import { LocationGeofencingComponent } from './mapbox/location-geofencing/indoor-3d.component';
 
 @NgModule({
   declarations: [
@@ -33,8 +35,10 @@ import { Indoor3DComponent } from './mapbox/indoor-3d/indoor-3d.component';
     LeafletComponent,
     DroneMissionComp,
     Indoor3DComponent,
+    LocationGeofencingComponent,
     ArcgisBasicComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule,

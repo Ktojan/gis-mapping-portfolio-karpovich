@@ -19,6 +19,11 @@ body {
     justify-content: space-between;
 }
 
+.vert-center {
+    align-content: center;        
+    align-items: center;
+}
+
 // --------  Some rules rewriting mapbox-gl.css styles ------- //
 .mapboxgl-map {
     border-radius: 20px;
