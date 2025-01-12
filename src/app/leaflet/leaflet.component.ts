@@ -2,9 +2,9 @@
 import { Component, ElementRef, inject, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import * as L from 'leaflet';
-import { TerraDraw, TerraDrawCircleMode, TerraDrawLeafletAdapter, TerraDrawSelectMode }
+import { TerraDraw, TerraDrawCircleMode, TerraDrawLeafletAdapter, TerraDrawPolygonMode, TerraDrawSelectMode }
  from 'terra-draw'; // https://github.com/JamesLMilner/terra-draw/tree/main
- import '../SidePanel/leaflet-sidepanel.min.js';// https://github.com/maxwell-ilai/Leaflet.SidePanel/tree/main
+ import './SidePanel/leaflet-sidepanel.min.js';// https://github.com/maxwell-ilai/Leaflet.SidePanel/tree/main
 import four_circles from './Four_circles.json';
 
 @Component({
@@ -62,7 +62,6 @@ export class LeafletComponent {
 
     // Import from geojson file
    L.geoJson(four_circles).eachLayer(function (layer) {
-    console.log(layer.feature);
     layer.bindPopup(layer.feature.properties?.name + `\n radius: ` + layer.feature.properties?.radiusKilometers.toFixed(2) + 'km (imported from geo-json file)');
   }).addTo(this.map);
     
@@ -85,7 +84,8 @@ export class LeafletComponent {
       tabsPosition: 'top',
       pushControls: true,
       darkMode: false,
-      startTab: 'tab-1'
+      startTab: 'tab-1',
+      closed: false
     }).addTo(this.map);
   }
 
@@ -104,7 +104,7 @@ export class LeafletComponent {
       const adapter = new TerraDrawLeafletAdapter({ map: this.map, lib: L });  
       this.draw = new TerraDraw({
          adapter: adapter,
-         modes: [new TerraDrawCircleMode(), new TerraDrawSelectMode({
+         modes: [new TerraDrawPolygonMode(), new TerraDrawCircleMode(), new TerraDrawSelectMode({
           // Allow manual deselection of features
           allowManualDeselection: true,
           flags: {
@@ -131,7 +131,7 @@ export class LeafletComponent {
     startNewLayer() {
       this.draw.start();
       this.config.isDrawingLayer = true;
-      this.draw.setMode("circle");
+      this.draw.setMode("polygon");
       this.config.currentDrawObj = { newLayerName: '', features: [] };
     }  
   
