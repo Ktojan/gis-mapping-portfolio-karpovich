@@ -41,6 +41,10 @@ header {
     }
 }
 
+a[role="menuitem"] {
+    color: white; text-decoration: none;
+}
+
 .map-wrapper {
     border: 6px solid gray;
     border-radius: 20px;

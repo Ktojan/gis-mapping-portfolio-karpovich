@@ -7,6 +7,35 @@
     </h3>
     </div>
     <div class="flex vert-center">
+      
+      <button mat-icon-button [matMenuTriggerFor]="mapboxmenu" class="listmenu-button  vert-center">
+        <mat-icon>more_vert</mat-icon><span> Mapbox</span>
+      </button>
+      <mat-menu #mapboxmenu="matMenu">
+        <button *ngFor="let item of menuLinks.mapbox" [disabled]="item.disabled"
+         [routerLink]="item.routerLink" mat-menu-item>
+          <mat-icon>{{item.icon}}</mat-icon>
+          <span>{{item.label}}</span>
+        </button>
+        <a mat-menu-item href="https://leaflet-geojson-saudi-farming.vercel.app/mapboxgl" target="_blank">
+          <mat-icon>shape_line</mat-icon> Separate app: Drawing, markers</a>          
+        <a mat-menu-item href="https://github.com/Ktojan/geofencing-react-playground/tree/animations-mapbox" target="_blank">
+          <mat-icon>flip_to_front</mat-icon> Separate app: Geofencing, animations</a>          
+      </mat-menu> 
+      
+      <button mat-icon-button class="listmenu-button  vert-center" [matMenuTriggerFor]="leafletmenu">
+        <mat-icon>more_vert</mat-icon><span> Leaflet </span>
+      </button>
+      <mat-menu #leafletmenu="matMenu">
+        <button *ngFor="let item of menuLinks.leaflet"
+         [routerLink]="item.routerLink" mat-menu-item>
+          <mat-icon>{{item.icon}}</mat-icon>
+          <span>{{item.label}}</span>
+        </button>
+        <a mat-menu-item href="https://github.com/Ktojan/geofencing-react-playground/tree/main" target="_blank">
+          <mat-icon>burst_mode</mat-icon> React app + Leaflet: Geocoding, Draw, Export </a>         
+      </mat-menu>
+
       <button mat-icon-button [matMenuTriggerFor]="arcgismenu" class="listmenu-button  vert-center">
         <mat-icon>more_vert</mat-icon><span>ArcGIS by ESRI </span><mat-icon>map</mat-icon>
       </button>
@@ -17,30 +46,8 @@
           <span>{{item.label}}</span>
         </button>
       </mat-menu>
-
-      <button mat-icon-button class="listmenu-button  vert-center" [matMenuTriggerFor]="leafletmenu">
-        <mat-icon>more_vert</mat-icon><span> Leaflet </span>
-      </button>
-      <mat-menu #leafletmenu="matMenu">
-        <button *ngFor="let item of menuLinks.leaflet"
-         [routerLink]="item.routerLink" mat-menu-item>
-          <mat-icon>{{item.icon}}</mat-icon>
-          <span>{{item.label}}</span>
-        </button>
-      </mat-menu>
-
-      <button mat-icon-button [matMenuTriggerFor]="mapboxmenu" class="listmenu-button  vert-center">
-        <mat-icon>more_vert</mat-icon><span> Mapbox</span>
-      </button>
-      <mat-menu #mapboxmenu="matMenu">
-        <button *ngFor="let item of menuLinks.mapbox" [disabled]="item.disabled"
-         [routerLink]="item.routerLink" mat-menu-item>
-          <mat-icon>{{item.icon}}</mat-icon>
-          <span>{{item.label}}</span>
-        </button>
-      </mat-menu>
     </div>
-    <button *ngIf="displayAbout" (click)="clickAbout('1500ms', '1000ms')" mat-fab extended class="about-button">ABOUT</button>
+    <button [routerLink]="'/'" mat-fab extended class="about-button">ABOUT</button>
   </nav>
 </header>
 
