@@ -26,6 +26,7 @@
     "ngx-mapbox-gl": "^11.0.1",
     "rxjs": "~7.8.0",
     "terra-draw": "^1.0.0-beta.8",
+    "terra-draw-leaflet-adapter": "^1.0.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
   },

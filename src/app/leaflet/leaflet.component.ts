@@ -2,8 +2,9 @@
 import { Component, ElementRef, inject, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import * as L from 'leaflet';
-import { TerraDraw, TerraDrawCircleMode, TerraDrawFreehandMode, TerraDrawLeafletAdapter, TerraDrawPolygonMode, TerraDrawRectangleMode, TerraDrawSelectMode }
+import { TerraDraw, TerraDrawCircleMode, TerraDrawFreehandMode, TerraDrawPolygonMode, TerraDrawRectangleMode, TerraDrawSelectMode }
  from 'terra-draw'; // https://github.com/JamesLMilner/terra-draw/tree/main
+ import { TerraDrawLeafletAdapter } from "terra-draw-leaflet-adapter";
  import './SidePanel/leaflet-sidepanel.min.js';// https://github.com/maxwell-ilai/Leaflet.SidePanel/tree/main
 import four_circles from './Four_circles.json';
 
