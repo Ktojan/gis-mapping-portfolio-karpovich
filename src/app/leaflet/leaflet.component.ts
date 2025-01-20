@@ -2,7 +2,7 @@
 import { Component, ElementRef, inject, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import * as L from 'leaflet';
-import { TerraDraw, TerraDrawCircleMode, TerraDrawLeafletAdapter, TerraDrawPolygonMode, TerraDrawSelectMode }
+import { TerraDraw, TerraDrawCircleMode, TerraDrawFreehandMode, TerraDrawLeafletAdapter, TerraDrawPolygonMode, TerraDrawRectangleMode, TerraDrawSelectMode }
  from 'terra-draw'; // https://github.com/JamesLMilner/terra-draw/tree/main
  import './SidePanel/leaflet-sidepanel.min.js';// https://github.com/maxwell-ilai/Leaflet.SidePanel/tree/main
 import four_circles from './Four_circles.json';
@@ -30,10 +30,12 @@ export class LeafletComponent {
     defaultFillOpacity: 0.6,
     activeDrawName: '',
     activeDrawColor: '',
+    activeDrawTool: '',
     currentDrawObj: { newLayerName: '', features: [] },
     saveNewDrawColors: ['green', 'yellow', 'brown', 'red', 'violet'],
     isDrawingLayer: false,
-    customDrawsCounter: 1
+    customDrawsCounter: 1,
+    drawFigures: []
   }  
 
   ngAfterViewInit() {
@@ -102,36 +104,40 @@ export class LeafletComponent {
     // ---------------------------- START OF terra-draw HANDLERS ------------------------- //
     addToolbarDraw() {
       const adapter = new TerraDrawLeafletAdapter({ map: this.map, lib: L });  
-      this.draw = new TerraDraw({
-         adapter: adapter,
-         modes: [new TerraDrawPolygonMode(), new TerraDrawCircleMode(), new TerraDrawSelectMode({
-          // Allow manual deselection of features
-          allowManualDeselection: true,
-          flags: {
-            point: {
-              feature: {
+      const modes = [new TerraDrawPolygonMode(), new TerraDrawRectangleMode(), new TerraDrawCircleMode(), new TerraDrawFreehandMode(), new TerraDrawSelectMode({
+        // Allow manual deselection of features
+        allowManualDeselection: true,
+        flags: {
+          point: {
+            feature: {
+              draggable: true,
+            },
+          },
+          circle: {
+            feature: {
+              draggable: true,
+              coordinates: {
+                midpoints: true,
                 draggable: true,
+                deletable: true,
               },
             },
-            circle: {
-              feature: {
-                draggable: true,
-                coordinates: {
-                  midpoints: true,
-                  draggable: true,
-                  deletable: true,
-                },
-              },
-            },      
-          },       
-        })] 
-      });  
+          },      
+        },       
+      })];
+
+      this.draw = new TerraDraw({
+         adapter: adapter,
+         modes
+      });
+      this.config.drawFigures = modes.map(el => el['mode']);  
     }
   
     startNewLayer() {
       this.draw.start();
       this.config.isDrawingLayer = true;
       this.draw.setMode("polygon");
+      this.config.activeDrawTool = this.config.drawFigures[0] || "polygon";
       this.config.currentDrawObj = { newLayerName: '', features: [] };
     }  
   
@@ -178,10 +184,28 @@ export class LeafletComponent {
     }
   
     resetDrawConfig() {
-      this.config.activeDrawName = '',
-      this.config.activeDrawColor = '',
+      this.config.activeDrawName = '';
+      this.config.activeDrawColor = '';
+      this.config.activeDrawTool = '';
       this.config.isDrawingLayer = false;
     } 
+
+    switchDrawTool() { 
+      this.draw.setMode(this.config.activeDrawTool || "polygon");
+    }
+
+    setDrawFigureIcon(figure: string): string {
+      switch (figure) {
+        case 'polygon':
+          return 'polyline' 
+        case 'freehand':
+          return 'draw'
+        case 'select':
+          return 'border_clear'
+        default:
+          return figure
+      }
+    }  
 }
 
 function setInitialStyles(feature, isDrawn?: boolean) {
