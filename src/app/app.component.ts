@@ -32,12 +32,12 @@ export class AppComponent {
       },
     ],
     mapbox: [
-      {
-        routerLink: '/location-geofencing',
-        icon: 'location_searching',
-        label: 'Geofencing, tracking location',
-        hasOwnAbout: false
-      },
+      // {
+      //   routerLink: '/location-geofencing',
+      //   icon: 'location_searching',
+      //   label: 'Geofencing, tracking location',
+      //   hasOwnAbout: false
+      // },
       {
         routerLink: '/sync-camera-drone',
         icon: 'sync',

@@ -26,6 +26,7 @@ import { ArcgisBasicComponent } from './arcgis-basic/arcgis-basic.component';
 import { Indoor3DComponent } from './mapbox/indoor-3d/indoor-3d.component';
 import { HomeComponent } from './home/home.component';
 import { LocationGeofencingComponent } from './mapbox/location-geofencing/indoor-3d.component';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { LocationGeofencingComponent } from './mapbox/location-geofencing/indoor
     AppRoutingModule,
     FormsModule,
     MatDialogModule, MatDialogActions,  MatDialogClose,  MatDialogContent, MatDialogTitle , MatCardModule, MatButtonModule, MatSelectModule,
-    MatInputModule, MatSlideToggleModule, MatIconModule, MatMenuModule,
+    MatInputModule, MatSlideToggleModule, MatIconModule, MatMenuModule, MatButtonToggleModule,
     NgxMapboxGLModule,
   ],
   providers: [MapboxService],
