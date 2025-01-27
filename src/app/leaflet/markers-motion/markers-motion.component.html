@@ -1,0 +1,22 @@
+<div id="markersmotionmap" #markersmotionmap class="usual-border">
+    <div id="tinanic-about-panel" class="sidepanel opened" aria-label="side panel" aria-hidden="false">
+        <div class="sidepanel-inner-wrapper">
+             <div class="sidepanel-content-wrapper">
+                  <div class="sidepanel-content">
+                    <button *ngIf="!motionLaunched" mat-fab extended color="primary"
+                     (click)="toggle.click(); motionLaunched = true; startMotion()">Start Motion</button>
+                    <hr>
+                    <h2>Animation of Titanic Wreck</h2>
+                    <img src="/images/titanic_pic_0.png" />
+                    <br><br>
+                    <img src="/images/titanic_pic_1.png" />
+                    <br><br>
+                    <img src="/images/titanic_pic_2.png" />
+                  </div>
+             </div>
+        </div>
+        <div class="sidepanel-toggle-container">
+             <button #toggle class="sidepanel-toggle-button" type="button" aria-label="toggle side panel"></button>
+        </div>
+   </div>
+</div>
