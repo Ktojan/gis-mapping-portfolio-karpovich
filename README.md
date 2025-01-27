@@ -6,6 +6,7 @@ with vector base maps.
 
 ![gis-port_1](https://github.com/user-attachments/assets/63396ce9-deda-403c-9373-f3ba3dc7686d)
 
+![titanic_demo](https://github.com/user-attachments/assets/8c6f5019-831b-4de4-9ded-aa33fedd1f86)
 
 ## Development server
 
