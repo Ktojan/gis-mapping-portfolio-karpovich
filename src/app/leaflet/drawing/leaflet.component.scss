@@ -1,11 +1,11 @@
-@import './SidePanel//leaflet-sidepanel.css';
+@import '../SidePanel/leaflet-sidepanel.css';
 
 /// ------   Map area  ------- ///
 
 :host {
     height: 100%;
     width: 100%;
-    background-image: url('../../../public/images/tabuk_circles.png');
+    background-image: url('/public/images/tabuk_circles.png');
     background-size: cover;  
 }
 
