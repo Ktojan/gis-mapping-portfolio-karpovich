@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { SyncCameraDroneComponent } from './mapbox/sync-camera-drone/sync-camera-drone.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { MoveAndStreamWS } from './mapbox/moveAndStreamWS/moveAndStreamWS.component';
-import { LeafletComponent } from './leaflet/leaflet.component';
+import { LeafletComponent } from './leaflet/drawing/leaflet.component';
+import { MarkersMotionComponent } from './leaflet/markers-motion/markers-motion.component';
 import { DroneMissionComp } from './mapbox/drone-mission-mimic/drone-mission.component';
 import { ArcgisBasicComponent } from './arcgis-basic/arcgis-basic.component';
 import { Indoor3DComponent } from './mapbox/indoor-3d/indoor-3d.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent },
   {path: 'sync-camera-drone', component: SyncCameraDroneComponent },
   {path: 'leaflet', component: LeafletComponent },
+  {path: 'markers-motion', component: MarkersMotionComponent },
   {path: 'moveAndStreamWS', component: MoveAndStreamWS },
   {path: 'drone-mission', component: DroneMissionComp },
   {path: 'indoor3d', component: Indoor3DComponent },

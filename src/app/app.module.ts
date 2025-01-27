@@ -6,7 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SyncCameraDroneComponent } from './mapbox/sync-camera-drone/sync-camera-drone.component';
 import { MoveAndStreamWS } from './mapbox/moveAndStreamWS/moveAndStreamWS.component';
-import { LeafletComponent } from './leaflet/leaflet.component';
+import { LeafletComponent } from './leaflet/drawing/leaflet.component';
+import { MarkersMotionComponent } from './leaflet/markers-motion/markers-motion.component';
 // --------------------------- MAPBOX stuff and files ----------------- //
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 // ---------------------------Material stuff ----------------------//
@@ -34,6 +35,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     SyncCameraDroneComponent,
     MoveAndStreamWS,
     LeafletComponent,
+    MarkersMotionComponent,
     DroneMissionComp,
     Indoor3DComponent,
     LocationGeofencingComponent,

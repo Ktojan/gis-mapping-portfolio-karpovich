@@ -25,6 +25,12 @@ export class AppComponent {
     ],
     leaflet: [
       {
+        routerLink: '/markers-motion',
+        icon: 'directions_boat',
+        label: 'Movable markers (motion)',
+        hasOwnAbout: false
+      },
+      {
         routerLink: '/leaflet',
         icon: 'shape_line',
         label: 'Drawing, polygons, export',
